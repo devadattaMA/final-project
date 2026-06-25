@@ -4,10 +4,10 @@ import java.sql.SQLException;
 
 public class DatabaseManager {
 
-    // TODO: Change these values to match your own database configuration
-    private static final String URL = "jdbc:mysql://localhost:3306/game_project";
-    private static final String USER = "root";
-    private static final String PASSWORD = "";
+    // TODO: Change USER and PASSWORD to match your SQL Server login
+    private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=game_project;encrypt=true;trustServerCertificate=true;";
+    private static final String USER = "sa";       // your SQL Server username
+    private static final String PASSWORD = "";     // your SQL Server password
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
