@@ -93,7 +93,7 @@ public class PlayerService {
     // Retrieve Top 5 players ordered by score, then wins
     public ArrayList<Player> getTopFiveScorers() {
         ArrayList<Player> topPlayers = new ArrayList<>();
-        String sql = "SELECT * FROM players ORDER BY score DESC, wins DESC LIMIT 5";
+        String sql = "SELECT TOP 5 * FROM players ORDER BY score DESC, wins DESC";
 
         try {
             Connection conn = DatabaseManager.getConnection();
