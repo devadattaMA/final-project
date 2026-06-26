@@ -4,10 +4,9 @@ import java.sql.SQLException;
 
 public class DatabaseManager {
 
-    // TODO: Change USER and PASSWORD to match your SQL Server login
-    private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=game_project;encrypt=true;trustServerCertificate=true;";
-    private static final String USER = "sa";       // your SQL Server username
-    private static final String PASSWORD = "";     // your SQL Server password
+    private static final String URL = "jdbc:sqlserver://DESKTOP-JNT1CTO\\SQLEXPRESS:1433;databaseName=game_project;encrypt=true;trustServerCertificate=true;";
+    private static final String USER = "sa";
+    private static final String PASSWORD = "12345"; // the password you set earlier
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
