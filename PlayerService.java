@@ -5,11 +5,12 @@ import java.util.ArrayList;
 
 public class PlayerService {
 
-    // Check username and password from database, return Player if found
     public Player login(String username, String password) {
+        System.out.println("Trying login: [" + username + "] [" + password + "]"); // DEBUG
         String sql = "SELECT * FROM players WHERE username = ? AND password = ?";
         try {
             Connection conn = DatabaseManager.getConnection();
+            System.out.println("Connected to DB successfully"); // DEBUG
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, username);
             stmt.setString(2, password);
@@ -24,15 +25,16 @@ public class PlayerService {
                 int score    = rs.getInt("score");
                 conn.close();
                 return new Player(id, uname, wins, losses, draws, score);
+            } else {
+                System.out.println("No matching user found in database"); // DEBUG
             }
             conn.close();
         } catch (Exception e) {
-            System.out.println("Login error: " + e.getMessage());
+            System.out.println("Login error: " + e.getMessage()); // DEBUG
         }
         return null;
     }
 
-    // Update wins/losses/draws and score after a game result
     public void updateStatistics(Player player, String result) {
         int additionalScore = 0;
         String sql = "";
@@ -62,7 +64,6 @@ public class PlayerService {
         }
     }
 
-    // Get a single player's latest data from database (to refresh stats display)
     public Player getPlayerById(int id) {
         String sql = "SELECT * FROM players WHERE id = ?";
         try {
@@ -90,7 +91,6 @@ public class PlayerService {
         return null;
     }
 
-    // Retrieve Top 5 players ordered by score, then wins
     public ArrayList<Player> getTopFiveScorers() {
         ArrayList<Player> topPlayers = new ArrayList<>();
         String sql = "SELECT TOP 5 * FROM players ORDER BY score DESC, wins DESC";
